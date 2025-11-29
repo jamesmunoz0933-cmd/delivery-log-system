@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container container-vertical">
     <h2>Grab Delivery Log</h2>
 
     <input id="name" placeholder="Name">
@@ -14,9 +14,9 @@
     <input id="order" placeholder="Order Details">
 
     <button id="submitGrab">Submit</button>
-    <button onclick="location.href='index.html'">Back</button>
+    <button class="back-btn" onclick="location.href='index.html'">Back</button>
 
-    <p id="message" style="color:green;"></p>
+    <p id="message"></p>
 </div>
 
 <script type="module">
@@ -42,13 +42,17 @@ document.getElementById("submitGrab").addEventListener("click", () => {
     })
     .then(() => {
         message.textContent = "Log saved successfully!";
+        message.style.color = "green";
         // Clear inputs
         document.getElementById("name").value = "";
         document.getElementById("phone").value = "";
         document.getElementById("order").value = "";
         setTimeout(() => message.textContent = "", 3000);
     })
-    .catch(err => alert("Error saving log: " + err.message));
+    .catch(err => {
+        message.textContent = "Error saving log: " + err.message;
+        message.style.color = "red";
+    });
 });
 </script>
 

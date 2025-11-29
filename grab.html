@@ -1,12 +1,16 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grab Delivery Log</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container container-vertical">
+<div class="container">
     <h2>Grab Delivery Log</h2>
 
     <input id="name" placeholder="Name">
@@ -43,18 +47,18 @@ document.getElementById("submitGrab").addEventListener("click", () => {
     .then(() => {
         message.textContent = "Log saved successfully!";
         message.style.color = "green";
+
         // Clear inputs
         document.getElementById("name").value = "";
         document.getElementById("phone").value = "";
         document.getElementById("order").value = "";
+
         setTimeout(() => message.textContent = "", 3000);
     })
-    .catch(err => {
-        message.textContent = "Error saving log: " + err.message;
-        message.style.color = "red";
-    });
+    .catch(err => alert("Error saving log: " + err.message));
 });
 </script>
 
 </body>
 </html>
+

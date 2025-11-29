@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<div class="container container-vertical">
+<div class="container">
     <h2>FoodPanda Delivery Log</h2>
 
     <input id="name" placeholder="Name">
@@ -14,9 +14,9 @@
     <input id="order" placeholder="Order Details">
 
     <button id="submitPanda">Submit</button>
-    <button class="back-btn" onclick="location.href='index.html'">Back</button>
+    <button onclick="location.href='index.html'">Back</button>
 
-    <p id="message"></p>
+    <p id="message" style="color:green;"></p>
 </div>
 
 <script type="module">
@@ -33,26 +33,18 @@ document.getElementById("submitPanda").addEventListener("click", () => {
         return;
     }
 
-    // Push data to Firebase under pandaLogs
     push(ref(database, "pandaLogs/"), {
-        name: name,
-        phone: phone,
-        order: order,
+        name, phone, order,
         date: new Date().toLocaleString()
     })
     .then(() => {
         message.textContent = "Log saved successfully!";
-        message.style.color = "green";
-        // Clear inputs
         document.getElementById("name").value = "";
         document.getElementById("phone").value = "";
         document.getElementById("order").value = "";
         setTimeout(() => message.textContent = "", 3000);
     })
-    .catch(err => {
-        message.textContent = "Error saving log: " + err.message;
-        message.style.color = "red";
-    });
+    .catch(err => alert("Error saving log: " + err.message));
 });
 </script>
 

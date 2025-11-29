@@ -1,20 +1,113 @@
-/* --------------------- FORM CONTAINER --------------------- */
+/* --------------------- GLOBAL --------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    background: #fff5f5;
+    color: #333;
+}
+
+/* --------------------- FORM / PAGE CONTAINER --------------------- */
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* top aligned for logs pages */
     align-items: center;
-    height: 100vh;
-    background: #fff5f5; /* same as index background */
     padding: 20px;
+    text-align: center;
+    min-height: 100vh;
+}
+
+/* Header / Dashboard title */
+.container h2, .dashboard-title {
+    color: #d60000;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* --------------------- BUTTONS --------------------- */
+button, #submitGrab, #submitPanda, .login-btn, .btn-grab, .btn-panda, .back-btn, .btn-admin {
+    width: 320px;
+    max-width: 90%;
+    padding: 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
     text-align: center;
 }
 
-.container h2 {
-    color: #d60000; /* same red as index header */
-    margin-bottom: 30px;
-    font-size: 28px;
-    font-weight: bold;
+/* Grab / logs buttons style */
+.btn-grab, #submitGrab {
+    background-color: #00b140;
+    color: white;
+}
+
+.btn-grab:hover, #submitGrab:hover {
+    background-color: #009b35;
+}
+
+/* FoodPanda button style */
+.btn-panda, #submitPanda {
+    background-color: #ff2b85;
+    color: white;
+}
+
+.btn-panda:hover, #submitPanda:hover {
+    background-color: #e02676;
+}
+
+/* Back / Admin buttons style */
+.back-btn, .login-btn, .btn-admin {
+    background-color: #ffcc00;
+    color: black;
+}
+
+.back-btn:hover, .login-btn:hover, .btn-admin:hover {
+    background-color: #e6b800;
+}
+
+/* --------------------- TABLE STYLING --------------------- */
+.table-box {
+    width: 100%;
+    max-width: 1000px;
+    overflow-x: auto;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    text-align: center; /* center all table content */
+}
+
+table th, table td {
+    border: 2px solid #d60000;
+    padding: 10px;
+}
+
+table th {
+    background-color: #d60000;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #ffe6e6;
 }
 
 /* --------------------- INPUTS --------------------- */
@@ -30,58 +123,7 @@ input {
 }
 
 input:focus {
-    border-color: #ffcc00; /* highlight when typing */
-}
-
-/* --------------------- SUBMIT BUTTON --------------------- */
-#submitGrab, #submitPanda {
-    width: 320px;
-    max-width: 90%;
-    padding: 15px;
-    margin: 20px 0;
-    border: none;
-    border-radius: 12px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-#submitGrab {
-    background-color: #00b140; /* green like index Grab */
-    color: white;
-}
-
-#submitGrab:hover {
-    background-color: #009b35;
-}
-
-#submitPanda {
-    background-color: #ff2b85; /* pink like index FoodPanda */
-    color: white;
-}
-
-#submitPanda:hover {
-    background-color: #e02676;
-}
-
-/* --------------------- BACK BUTTON --------------------- */
-button.back-btn {
-    width: 320px;
-    max-width: 90%;
-    padding: 15px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 12px;
-    background-color: #ffcc00; /* same as index admin button */
-    color: black;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button.back-btn:hover {
-    background-color: #e6b800;
+    border-color: #ffcc00;
 }
 
 /* --------------------- MESSAGE --------------------- */
@@ -94,9 +136,15 @@ button.back-btn:hover {
 
 /* --------------------- RESPONSIVE --------------------- */
 @media only screen and (max-width: 600px) {
-    input, #submitGrab, #submitPanda, button.back-btn {
+    input, button, #submitGrab, #submitPanda, .login-btn {
         width: 90%;
         font-size: 16px;
         padding: 12px;
     }
+
+    table th, table td {
+        font-size: 14px;
+        padding: 8px;
+    }
 }
+

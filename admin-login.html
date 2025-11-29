@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div class="login-box">
+<div class="container">
     <h2>Admin Login</h2>
     <input type="password" id="pass" placeholder="Enter passcode">
     <button class="login-btn" onclick="login()">Login</button>
@@ -17,7 +17,7 @@
 <script>
 function login() {
     const passcode = document.getElementById("pass").value.trim();
-    if(passcode === "1076") {
+    if(passcode === "1067") {
         window.location.href = "admin-dashboard.html";
     } else {
         alert("Wrong passcode!");
@@ -28,3 +28,4 @@ function login() {
 
 </body>
 </html>
+

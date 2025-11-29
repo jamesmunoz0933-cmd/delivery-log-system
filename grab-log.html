@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,26 +8,26 @@
 </head>
 <body>
 
-<h2 class="dashboard-title">Grab Delivery Logs</h2>
+<div class="container">
+    <h2 class="dashboard-title">Grab Delivery Logs</h2>
 
-<div class="btn-container" style="margin-bottom: 20px;">
-    <button onclick="location.href='admin-dashboard.html'" style="background:#ffcc00; color:black;">Back to Admin Dashboard</button>
-</div>
+    <button class="back-btn" onclick="location.href='admin-dashboard.html'">Back to Admin Dashboard</button>
 
-<div class="table-box">
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Order</th>
-                <th>Date & Time</th>
-            </tr>
-        </thead>
-        <tbody id="grabLogTable">
-            <tr><td colspan="4" style="text-align:center;">Loading logs...</td></tr>
-        </tbody>
-    </table>
+    <div class="table-box">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Order</th>
+                    <th>Date & Time</th>
+                </tr>
+            </thead>
+            <tbody id="grabLogTable">
+                <tr><td colspan="4" style="text-align:center;">Loading logs...</td></tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script type="module">
@@ -46,29 +46,31 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-
 const tableBody = document.getElementById("grabLogTable");
 const logsRef = ref(database, "grabLogs");
 
-onValue(logsRef, (snapshot) => {
-    tableBody.innerHTML = "";
-    const data = snapshot.val();
-    if (data) {
-        Object.values(data).forEach((log) => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${log.name}</td>
-                <td>${log.phone}</td>
-                <td>${log.order}</td>
-                <td>${log.date}</td>
-            `;
-            tableBody.appendChild(row);
-        });
-    } else {
-        tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">No logs found.</td></tr>`;
-    }
+window.addEventListener('DOMContentLoaded', () => {
+    onValue(logsRef, (snapshot) => {
+        tableBody.innerHTML = "";
+        const data = snapshot.val();
+        if (data) {
+            Object.values(data).forEach((log) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${log.name}</td>
+                    <td>${log.phone}</td>
+                    <td>${log.order}</td>
+                    <td>${log.date}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        } else {
+            tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">No logs found.</td></tr>`;
+        }
+    }, { onlyOnce: false });
 });
 </script>
 
 </body>
 </html>
+

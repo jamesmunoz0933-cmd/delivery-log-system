@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FoodPanda Delivery Log</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>FoodPanda Delivery Log</h2>
+
+    <input id="name" placeholder="Name">
+    <input id="phone" placeholder="Phone Number">
+    <input id="order" placeholder="Order Details">
+
+    <button id="submitPanda">Submit</button>
+    <button onclick="location.href='index.html'">Back</button>
+
+    <p id="message" style="color:green;"></p>
+</div>
+
+<script type="module">
+import { database, ref, push } from "./firebase.js";
+
+document.getElementById("submitPanda").addEventListener("click", () => {
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const order = document.getElementById("order").value.trim();
+    const message = document.getElementById("message");
+
+    if (!name || !phone || !order) {
+        alert("All fields are required!");
+        return;
+    }
+
+    push(ref(database, "pandaLogs/"), {
+        name, phone, order,
+        date: new Date().toLocaleString()
+    })
+    .then(() => {
+        message.textContent = "Log saved successfully!";
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("order").value = "";
+        setTimeout(() => message.textContent = "", 3000);
+    })
+    .catch(err => alert("Error saving log: " + err.message));
+});
+</script>
+
+</body>
+</html>

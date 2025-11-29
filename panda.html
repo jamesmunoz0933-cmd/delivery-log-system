@@ -19,8 +19,23 @@
     <p id="message" style="color:green;"></p>
 </div>
 
+<!-- FULL FIXED SCRIPT -->
 <script type="module">
-import { database, ref, push } from "./firebase.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDGALpIC8hVVBtlIXI1rJQvwTBHpP203IE",
+    authDomain: "delivery-log-system.firebaseapp.com",
+    databaseURL: "https://delivery-log-system-default-rtdb.firebaseio.com",
+    projectId: "delivery-log-system",
+    storageBucket: "delivery-log-system.appspot.com",
+    messagingSenderId: "351121185884",
+    appId: "1:351121185884:web:b70de20aec0d83f9725a99"
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
 document.getElementById("submitPanda").addEventListener("click", () => {
     const name = document.getElementById("name").value.trim();
@@ -34,7 +49,9 @@ document.getElementById("submitPanda").addEventListener("click", () => {
     }
 
     push(ref(database, "pandaLogs/"), {
-        name, phone, order,
+        name: name,
+        phone: phone,
+        order: order,
         date: new Date().toLocaleString()
     })
     .then(() => {

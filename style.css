@@ -1,287 +1,102 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-/* --------------------- GLOBAL --------------------- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    background: #fff5f5;
-    color: #333;
-}
-
-/* --------------------- HEADER --------------------- */
-header {
-    background: #d60000;
-    color: white;
+/* --------------------- FORM CONTAINER --------------------- */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #fff5f5; /* same as index background */
     padding: 20px;
     text-align: center;
+}
+
+.container h2 {
+    color: #d60000; /* same red as index header */
+    margin-bottom: 30px;
     font-size: 28px;
     font-weight: bold;
 }
 
-/* --------------------- VERTICAL BUTTONS --------------------- */
-.container-vertical {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-.container-vertical button {
-    width: 250px;
-    padding: 18px;
-    margin: 15px 0;
-    font-size: 20px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.btn-grab {
-    background: #00b140;
-    color: white;
-}
-.btn-grab:hover {
-    background: #009b35;
-}
-
-.btn-foodpanda {
-    background: #ff2b85;
-    color: white;
-}
-.btn-foodpanda:hover {
-    background: #e02676;
-}
-
-.btn-admin {
-    background: #ffcc00;
-    color: black;
-}
-.btn-admin:hover {
-    background: #e6b800;
-}
-
-/* --------------------- FORM PAGES --------------------- */
-.form-box, .login-box {
-    width: 90%;
-    max-width: 400px;
-    margin: 60px auto;
-    background: white;
-    border-radius: 14px;
-    padding: 25px 30px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.2);
-    text-align: center;
-}
-
-.form-box h2, .login-box h2 {
-    color: #d60000;
-    margin-bottom: 20px;
-}
-
+/* --------------------- INPUTS --------------------- */
 input {
-    width: 100%;
+    width: 300px;
+    max-width: 90%;
     padding: 15px;
     margin: 10px 0;
     border-radius: 10px;
     border: 2px solid #d60000;
     font-size: 16px;
+    outline: none;
 }
 
 input:focus {
-    border-color: #ffcc00;
+    border-color: #ffcc00; /* highlight when typing */
 }
 
-.submit-btn, .login-btn {
-    background: #d60000;
-    color: white;
-    width: 100%;
+/* --------------------- SUBMIT BUTTON --------------------- */
+#submitGrab, #submitPanda {
+    width: 320px;
+    max-width: 90%;
     padding: 15px;
+    margin: 20px 0;
     border: none;
     border-radius: 12px;
-    margin-top: 15px;
-    cursor: pointer;
     font-size: 18px;
-    transition: 0.3s;
-}
-
-.submit-btn:hover, .login-btn:hover {
-    background: #bb0000;
-}
-
-/* --------------------- DONE BUTTON --------------------- */
-#doneContainer button {
-    width: 100%;
-    margin-top: 10px;
-    font-size: 18px;
-    border-radius: 12px;
-    cursor: pointer;
-    background: #d60000;
-    color: white;
-    border: none;
-    transition: 0.3s;
-}
-#doneContainer button:hover {
-    background: #bb0000;
-}
-
-/* ---------------- ADMIN TABLE ---------------- */
-.table-box {
-    width: 95%;
-    margin: 40px auto;
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    table-layout: auto;
-    text-align: center;
-}
-
-th, td {
-    padding: 12px 10px;
-    border-bottom: 1px solid #ddd;
-    word-wrap: break-word;
-}
-
-th {
-    background: #d60000;
-    color: white;
     font-weight: bold;
-}
-
-tr:hover {
-    background: #fff0f0;
-}
-
-h2.dashboard-title {
-    text-align: center;
-    color: #d60000;
-    margin-top: 30px;
-}
-
-/* ---------------- LOGIN PAGE ---------------- */
-.login-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 400px;
-    margin: auto;
-    padding: 25px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.2);
-}
-
-/* ---------------- BUTTONS INSIDE FORMS ---------------- */
-.delete-btn {
-    background: #ff2b2b;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 5px 10px;
     cursor: pointer;
     transition: 0.3s;
 }
-.delete-btn:hover {
-    background: #cc0000;
+
+#submitGrab {
+    background-color: #00b140; /* green like index Grab */
+    color: white;
 }
 
-.view-log-btn {
-    background: #d60000;
+#submitGrab:hover {
+    background-color: #009b35;
+}
+
+#submitPanda {
+    background-color: #ff2b85; /* pink like index FoodPanda */
     color: white;
+}
+
+#submitPanda:hover {
+    background-color: #e02676;
+}
+
+/* --------------------- BACK BUTTON --------------------- */
+button.back-btn {
+    width: 320px;
+    max-width: 90%;
+    padding: 15px;
     margin-top: 10px;
-}
-
-/* ---------------- ADMIN DASHBOARD BUTTONS ---------------- */
-.btn-container {
-    text-align: center;
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.btn-container button {
     border: none;
-    padding: 15px 25px;
-    font-size: 18px;
     border-radius: 12px;
+    background-color: #ffcc00; /* same as index admin button */
+    color: black;
+    font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.btn-container .btn-grab {
-    background: #00b140;
-    color: white;
-}
-.btn-container .btn-grab:hover {
-    background: #009b35;
+button.back-btn:hover {
+    background-color: #e6b800;
 }
 
-.btn-container .btn-foodpanda {
-    background: #ff2b85;
-    color: white;
-}
-.btn-container .btn-foodpanda:hover {
-    background: #e02676;
-}
-
-.btn-back-admin {
-    background: #ffcc00;
-    color: black;
-}
-.btn-back-admin:hover {
-    background: #e6b800;
+/* --------------------- MESSAGE --------------------- */
+#message {
+    color: green;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 /* --------------------- RESPONSIVE --------------------- */
 @media only screen and (max-width: 600px) {
-
-    header {
-        font-size: 22px;
-        padding: 15px;
-    }
-
-    .container-vertical button {
+    input, #submitGrab, #submitPanda, button.back-btn {
         width: 90%;
-        font-size: 18px;
-        padding: 15px;
-    }
-
-    .form-box, .login-box {
-        width: 95%;
-        padding: 20px;
-    }
-
-    input {
-        padding: 12px;
-        font-size: 15px;
-    }
-
-    .submit-btn, .login-btn, .delete-btn, .btn-container button {
-        width: 100%;
         font-size: 16px;
         padding: 12px;
-        margin-top: 10px;
-    }
-
-    table {
-        font-size: 14px;
-    }
-
-    th, td {
-        padding: 8px 5px;
     }
 }

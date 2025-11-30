@@ -7,6 +7,27 @@
     <link rel="stylesheet" href="style.css">
     <!-- PWA manifest -->
     <link rel="manifest" href="manifest.json">
+    <style>
+        #installBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #d60000;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        #installBtn:hover {
+            background-color: #bb0000;
+        }
+    </style>
 </head>
 <body>
 
@@ -20,8 +41,12 @@
 
 <p style="margin-top: 20px; text-align:center; color:#999;">Click anywhere to go to Monitor (if app installed)</p>
 
+<!-- Install App Button -->
+<button id="installBtn">Install App</button>
+
 <!-- AUTO-OPEN monitor.html when installed as app -->
 <script>
+    // Redirect to monitor.html if standalone mode
     if (window.matchMedia('(display-mode: standalone)').matches) {
         window.location.href = "monitor.html";
     }
@@ -32,9 +57,34 @@
         .then(() => console.log('Service Worker registered'))
         .catch(err => console.log('Service Worker registration failed:', err));
     }
+
+    // Handle PWA install prompt
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installBtn.style.display = 'block';
+    });
+
+    installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log('User response to install:', outcome);
+            deferredPrompt = null;
+            installBtn.style.display = 'none';
+        }
+    });
+
+    // Optional: click anywhere to go to admin-dashboard.html
+    document.body.addEventListener('click', () => {
+        if (!window.matchMedia('(display-mode: standalone)').matches) return;
+        window.location.href = 'monitor.html';
+    });
 </script>
 
 </body>
 </html>
-
 

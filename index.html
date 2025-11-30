@@ -19,14 +19,12 @@
 </div>
 
 <p style="margin-top: 20px; text-align:center; color:#999;">
-    Click anywhere to go to Admin Dashboard (if app installed)
+    Click anywhere to go to Admin Login (if app installed)
 </p>
 
-<!-- AUTO-OPEN adminlogin.html ONLY when installed as PWA -->
 <script>
-    // Detect if app is running as standalone PWA
-    if (window.matchMedia('(display-mode: standalone)').matches ||
-        window.navigator.standalone === true) {
+    // Auto-open adminlogin.html if app is installed
+    if (window.matchMedia('(display-mode: standalone)').matches) {
         window.location.href = "adminlogin.html";
     }
 

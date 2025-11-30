@@ -1,37 +1,51 @@
 const CACHE_NAME = 'delivery-log-cache-v1';
+
 const urlsToCache = [
-  '/',
+  './',
   'index.html',
+  'monitor.html',
   'style.css',
   'grab.html',
   'panda.html',
   'admin.html',
-  'monitor.html',
+  'admin-login.html',
   'admin-dashboard.html',
+  'grab-login.html',
+  'panda-login.html',
   'firebase.js',
-  'icons/icon-192.png',
-  'icons/icon-512.png'
+  'manifest.json',
+  'icons/web-app-manifest-192x192.png',
+  'icons/web-app-manifest-512x512.png'
 ];
 
-// Install service worker and cache files
+// Install SW and cache all files
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(urlsToCache);
+    })
   );
 });
 
-// Activate service worker and delete old caches
+// Activate SW
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)))
+      Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) return caches.delete(key);
+        })
+      )
     )
   );
 });
 
-// Fetch cached files if offline
+// Fetch cached files
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(response => response || fetch(event.request))
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
   );
 });
+

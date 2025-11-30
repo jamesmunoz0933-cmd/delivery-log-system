@@ -18,13 +18,18 @@
     <button class="back-btn" onclick="location.href='admin.html'">Admin</button>
 </div>
 
-<p style="margin-top: 20px; text-align:center; color:#999;">Click anywhere to go to Monitor (if app installed)</p>
+<p style="margin-top: 20px; text-align:center; color:#999;">
+    Click anywhere to go to Admin Dashboard (if app installed)
+</p>
 
-<!-- AUTO-OPEN monitor.html when installed as app -->
+<!-- AUTO-OPEN adminlogin.html ONLY when installed as PWA -->
 <script>
-  if (window.matchMedia('(display-mode: standalone)').matches) {
-    window.location.href = "adminlogin.html";
-}
+    // Detect if app is running as standalone PWA
+    if (window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true) {
+        window.location.href = "adminlogin.html";
+    }
+
     // Register service worker
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('service-worker.js')
@@ -73,5 +78,4 @@
 
 </body>
 </html>
-
 

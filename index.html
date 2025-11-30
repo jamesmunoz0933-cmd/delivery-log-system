@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delivery Log System</title>
     <link rel="stylesheet" href="style.css">
+    <!-- PWA manifest -->
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
@@ -15,6 +17,22 @@
     <button class="btn-panda" onclick="location.href='panda.html'">FoodPanda</button>
     <button class="back-btn" onclick="location.href='admin.html'">Admin</button>
 </div>
+
+<p style="margin-top: 20px; text-align:center; color:#999;">Click anywhere to go to Monitor (if app installed)</p>
+
+<!-- AUTO-OPEN monitor.html when installed as app -->
+<script>
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        window.location.href = "monitor.html";
+    }
+
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registered'))
+        .catch(err => console.log('Service Worker registration failed:', err));
+    }
+</script>
 
 </body>
 </html>

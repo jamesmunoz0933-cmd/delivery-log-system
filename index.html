@@ -22,10 +22,9 @@
 
 <!-- AUTO-OPEN monitor.html when installed as app -->
 <script>
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-        window.location.href = "monitor.html";
-    }
-
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    window.location.href = "adminlogin.html";
+}
     // Register service worker
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('service-worker.js')
@@ -74,4 +73,5 @@
 
 </body>
 </html>
+
 

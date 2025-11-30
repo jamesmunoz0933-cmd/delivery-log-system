@@ -5,75 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delivery Log System</title>
     <link rel="stylesheet" href="style.css">
-    <!-- PWA manifest -->
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
 <div class="container">
     <h2>Delivery Log System</h2>
-
     <button class="btn-grab" onclick="location.href='grab.html'">Grab</button>
     <button class="btn-panda" onclick="location.href='panda.html'">FoodPanda</button>
-    <button class="back-btn" onclick="location.href='admin.html'">Admin</button>
+    <button class="back-btn" onclick="location.href='admin-login.html'">Admin</button>
 </div>
 
-<p style="margin-top: 20px; text-align:center; color:#999;">
-    Click anywhere to go to Admin Login (if app installed)
-</p>
-
+<!-- PWA install button -->
 <script>
-    // Auto-open adminlogin.html if app is installed
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-        window.location.href = "adminlogin.html";
-    }
+let deferredPrompt;
+const installBtn = document.createElement("button");
+installBtn.textContent = "Install App";
+installBtn.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    font-size: 16px;
+    background: #d60000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 1000;
+    display: none;
+`;
+document.body.appendChild(installBtn);
 
-    // Register service worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-        .then(() => console.log('Service Worker registered'))
-        .catch(err => console.log('Service Worker registration failed:', err));
-    }
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = "block";
+});
 
-    // ----------- PWA INSTALL BUTTON -----------
-    let deferredPrompt;
-    const installBtn = document.createElement("button");
-    installBtn.textContent = "Install App";
-    installBtn.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        padding: 15px 25px;
-        font-size: 16px;
-        background: #d60000;
-        color: white;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        z-index: 1000;
-        display: none;
-    `;
-    document.body.appendChild(installBtn);
-
-    // Detect when PWA can be installed
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        installBtn.style.display = "block";
-    });
-
-    // When user clicks install button
-    installBtn.addEventListener('click', async () => {
-        installBtn.style.display = "none";
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
+installBtn.addEventListener('click', async () => {
+    installBtn.style.display = "none";
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            console.log("User response to install:", choiceResult.outcome);
             deferredPrompt = null;
-            console.log("User response to install:", outcome);
-        }
-    });
+        });
+    }
+});
+
+// Register service worker
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+    .then(() => console.log('Service Worker registered'))
+    .catch(err => console.log('Service Worker registration failed:', err));
+}
 </script>
 
 </body>
 </html>
-

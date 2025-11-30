@@ -1,7 +1,7 @@
 {
   "name": "Delivery Log System",
   "short_name": "DeliveryLog",
-  "start_url": "admin-login.html",
+  "start_url": "monitor.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#d60000",
@@ -18,5 +18,6 @@
     }
   ]
 }
+
 
 

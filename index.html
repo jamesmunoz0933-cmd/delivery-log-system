@@ -16,19 +16,12 @@
     <button class="btn-grab" onclick="location.href='grab.html'">Grab</button>
     <button class="btn-panda" onclick="location.href='panda.html'">FoodPanda</button>
     <button class="back-btn" onclick="location.href='admin.html'">Admin</button>
-    
-    <!-- Install App Button -->
-    <button id="installBtn" style="margin-top:20px; padding:12px 20px; font-size:18px; border-radius:12px; background:#00b140; color:white; border:none; cursor:pointer; display:none;">
-        Install App
-    </button>
 </div>
 
-<p style="margin-top: 20px; text-align:center; color:#999;">
-    Click anywhere to go to Monitor (if app installed)
-</p>
+<p style="margin-top: 20px; text-align:center; color:#999;">Click anywhere to go to Monitor (if app installed)</p>
 
+<!-- AUTO-OPEN monitor.html when installed as app -->
 <script>
-    // AUTO-OPEN monitor.html when installed as app
     if (window.matchMedia('(display-mode: standalone)').matches) {
         window.location.href = "monitor.html";
     }
@@ -40,23 +33,41 @@
         .catch(err => console.log('Service Worker registration failed:', err));
     }
 
-    // PWA Install prompt
+    // ----------- PWA INSTALL BUTTON -----------
     let deferredPrompt;
-    const installBtn = document.getElementById('installBtn');
+    const installBtn = document.createElement("button");
+    installBtn.textContent = "Install App";
+    installBtn.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        font-size: 16px;
+        background: #d60000;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        z-index: 1000;
+        display: none;
+    `;
+    document.body.appendChild(installBtn);
 
+    // Detect when PWA can be installed
     window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault(); // prevent automatic prompt
+        e.preventDefault();
         deferredPrompt = e;
-        installBtn.style.display = 'inline-block'; // show button
+        installBtn.style.display = "block";
     });
 
+    // When user clicks install button
     installBtn.addEventListener('click', async () => {
-        installBtn.style.display = 'none';
+        installBtn.style.display = "none";
         if (deferredPrompt) {
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
-            console.log('User response to install prompt:', outcome);
             deferredPrompt = null;
+            console.log("User response to install:", outcome);
         }
     });
 </script>

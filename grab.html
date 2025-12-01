@@ -41,12 +41,12 @@
 <script type="module">
 import { database, ref, push } from "./firebase.js";
 
-/* Get current date & time in desired format */
+/* Format current date & time fully written */
 function getCurrentDateTime() {
     const now = new Date();
     const options = {
         year: "numeric",
-        month: "long",
+        month: "long", // Full month name
         day: "numeric",
         hour: "numeric",
         minute: "2-digit",
@@ -99,4 +99,3 @@ document.getElementById("submitGrab").addEventListener("click", () => {
 
 </body>
 </html>
-

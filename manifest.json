@@ -1,7 +1,8 @@
 {
   "name": "Delivery Log System",
   "short_name": "DeliveryLog",
-  "start_url": "/delivery-log-system/admin-login.html",
+  "start_url": "index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#d60000",

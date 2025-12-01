@@ -3,6 +3,20 @@
 <head>
     <title>FoodPanda Delivery Log</title>
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Static box style like input */
+        .static-box {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
 
@@ -13,13 +27,15 @@
     <input id="phone" placeholder="Phone Number">
     <input id="order" placeholder="Order Details">
 
+    <!-- ✅ Static Date & Time box after Order -->
+    <div id="datetime" class="static-box"></div>
+
     <button id="submitPanda">Submit</button>
     <button onclick="location.href='index.html'">Back</button>
 
     <p id="message" style="color:green;"></p>
 </div>
 
-<!-- FULL FIXED SCRIPT -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
@@ -37,10 +53,30 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
+/* Function to get fully written current date & time */
+function getCurrentDateTime() {
+    const now = new Date();
+    const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true
+    };
+    return now.toLocaleString("en-US", options);
+}
+
+/* Auto-fill static box on page load */
+window.addEventListener("load", () => {
+    document.getElementById("datetime").textContent = getCurrentDateTime();
+});
+
 document.getElementById("submitPanda").addEventListener("click", () => {
     const name = document.getElementById("name").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const order = document.getElementById("order").value.trim();
+    const datetime = document.getElementById("datetime").textContent;
     const message = document.getElementById("message");
 
     if (!name || !phone || !order) {
@@ -52,13 +88,19 @@ document.getElementById("submitPanda").addEventListener("click", () => {
         name: name,
         phone: phone,
         order: order,
-        date: new Date().toLocaleString()
+        datetime: datetime
     })
     .then(() => {
         message.textContent = "Log saved successfully!";
+
+        // Clear user inputs (static box stays)
         document.getElementById("name").value = "";
         document.getElementById("phone").value = "";
         document.getElementById("order").value = "";
+
+        // Update static box for next log
+        document.getElementById("datetime").textContent = getCurrentDateTime();
+
         setTimeout(() => message.textContent = "", 3000);
     })
     .catch(err => alert("Error saving log: " + err.message));

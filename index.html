@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delivery Log System</title>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
+
+    <!-- Theme color for browser toolbar -->
+    <meta name="theme-color" content="#d60000">
 </head>
 <body>
 
@@ -16,7 +21,7 @@
     <button class="back-btn" onclick="location.href='admin-login.html'">Admin</button>
 </div>
 
-<!-- PWA install button -->
+<!-- PWA Install Button -->
 <script>
 let deferredPrompt;
 const installBtn = document.createElement("button");
@@ -37,6 +42,7 @@ installBtn.style.cssText = `
 `;
 document.body.appendChild(installBtn);
 
+// Show button when PWA can be installed
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
@@ -57,10 +63,11 @@ installBtn.addEventListener('click', async () => {
 // Register service worker
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js')
-    .then(() => console.log('Service Worker registered'))
-    .catch(err => console.log('Service Worker registration failed:', err));
+        .then(() => console.log('Service Worker registered'))
+        .catch(err => console.log('Service Worker registration failed:', err));
 }
 </script>
 
 </body>
 </html>
+

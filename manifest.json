@@ -1,8 +1,8 @@
 {
   "name": "Delivery Log System",
   "short_name": "DeliveryLog",
-  "start_url": "index.html",
-  "scope": "./",
+  "start_url": "/delivery-log-system/",
+  "scope": "/delivery-log-system/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#d60000",

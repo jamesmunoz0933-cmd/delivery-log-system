@@ -56,7 +56,7 @@ button, #submitGrab, #submitPanda, .login-btn, .btn-grab, .btn-panda, .back-btn,
 }
 
 .btn-grab:hover, #submitGrab:hover {
-    background-color: #FF0000;
+    background-color:#009b35;
 }
 
 /* FoodPanda button style */
@@ -147,5 +147,6 @@ input:focus {
         padding: 8px;
     }
 }
+
 
 

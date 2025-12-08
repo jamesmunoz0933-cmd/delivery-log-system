@@ -156,11 +156,14 @@ input:focus {
     cursor: pointer;
     font-weight: bold;
     transition: 0.2s ease;
+    margin: 10px 0;
 }
 
 #jumpLast:hover {
-    background-color: #f7e300; /* darker yellow */
+    background-color: #f7e300;
 }
+
+
 
 
 

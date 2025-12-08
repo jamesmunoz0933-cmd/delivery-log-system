@@ -14,10 +14,9 @@
     <button class="back-btn" onclick="location.href='admin-dashboard.html'">Back to Admin Dashboard</button>
     <button id="jumpLast">Go to Latest Entry</button>
 
-<ul id="userList">
-    <!-- Firebase data will load here -->
-</ul>
-
+    <ul id="userList">
+        <!-- Firebase data will load here -->
+    </ul>
 
     <div class="table-box">
         <table>
@@ -36,11 +35,11 @@
     </div>
 </div>
 
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
 
+// Firebase config
 const firebaseConfig = {
     apiKey: "AIzaSyDGALpIC8hVVBtlIXI1rJQvwTBHpP203IE",
     authDomain: "delivery-log-system.firebaseapp.com",
@@ -50,9 +49,39 @@ const firebaseConfig = {
     messagingSenderId: "351121185884",
     appId: "1:351121185884:web:b70de20aec0d83f9725a99"
 };
-const jumpBtn = document.getElementById("jumpLast");
-const tableBody = document.getElementById("grabLogTable");
 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const tableBody = document.getElementById("grabLogTable");
+const jumpBtn = document.getElementById("jumpLast");
+const logsRef = ref(database, "grabLogs");
+
+// Load logs from Firebase
+onValue(logsRef, (snapshot) => {
+    tableBody.innerHTML = "";
+    const data = snapshot.val();
+    if (data) {
+        Object.values(data).forEach((log) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${log.name}</td>
+                <td>${log.phone}</td>
+                <td>${log.order}</td>
+                <td>${log.datetime}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        // Auto-scroll to last row when logs load
+        const lastRow = tableBody.lastElementChild;
+        lastRow?.scrollIntoView({ behavior: "smooth", block: "end" });
+    } else {
+        tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">No logs found.</td></tr>`;
+    }
+}, { onlyOnce: false });
+
+// Scroll button functionality
 jumpBtn.addEventListener("click", () => {
     const rows = tableBody.querySelectorAll("tr");
     const lastRow = rows[rows.length - 1];
@@ -62,42 +91,8 @@ jumpBtn.addEventListener("click", () => {
         alert("No entries found.");
     }
 });
-
-
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-const tableBody = document.getElementById("grabLogTable");
-const logsRef = ref(database, "grabLogs");
-
-window.addEventListener('DOMContentLoaded', () => {
-    onValue(logsRef, (snapshot) => {
-        tableBody.innerHTML = "";
-        const data = snapshot.val();
-        if (data) {
-            Object.values(data).forEach((log) => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${log.name}</td>
-                    <td>${log.phone}</td>
-                    <td>${log.order}</td>
-                    <td>${log.datetime}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-        } else {
-            tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">No logs found.</td></tr>`;
-        }
-    }, { onlyOnce: false });
-}));
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
 

@@ -147,6 +147,21 @@ input:focus {
         padding: 8px;
     }
 }
+#jumpLast {
+    background-color: yellow;
+    color: black;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+
+#jumpLast:hover {
+    background-color: #f7e300; /* darker yellow */
+}
+
 
 
 

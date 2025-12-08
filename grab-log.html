@@ -51,22 +51,6 @@ const firebaseConfig = {
     appId: "1:351121185884:web:b70de20aec0d83f9725a99"
 };
 
-const jumpBtn = document.getElementById("jumpLast");
-const tableBody = document.getElementById("grabLogTable");
-
-const jumpBtn = document.getElementById("jumpLast");
-const tableBody = document.getElementById("grabLogTable");
-
-jumpBtn.addEventListener("click", () => {
-    const rows = tableBody.querySelectorAll("tr");
-    const lastRow = rows[rows.length - 1];
-    if (lastRow) {
-        lastRow.scrollIntoView({ behavior: "smooth", block: "end" });
-    } else {
-        alert("No entries found.");
-    }
-});
-
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);

@@ -164,14 +164,15 @@ input:focus {
 }
  -1;          /* Ibutang sa likod para dili ma-tabunan */
 .background-video {
-  position: fixed;      /* Stay in background */
-  top: 0;               /* Align top */
-  left: 0;              /* Align left */
-  width: 100vw;         /* Full viewport width */
-  height: 100vh;        /* Full viewport height */
-  object-fit: cover;    /* Cover whole area */
-  z-index: -1;          /* Behind content */
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  object-fit: cover !important;
+  z-index: -1 !important;
 }
+
 
 
 

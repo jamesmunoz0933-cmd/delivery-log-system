@@ -162,19 +162,17 @@ input:focus {
 #jumpLast:hover {
     background-color: #f7e300;
 }
-body {
-  margin: 0;
+.background-video {
+  position: fixed;      /* Fixed para mag-stay sa background */
+  top: 0;               /* I-align sa top */
+  left: 0;              /* I-align sa left */
+  width: 100vw;         /* Full viewport width */
+  height: 100vh;        /* Full viewport height */
+  object-fit: cover;    /* I-scale ang video para mo-cover tibuok box */
+  z-index: -1;          /* Ibutang sa likod para dili ma-tabunan */
 }
 
-.background-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
+
 
 
 

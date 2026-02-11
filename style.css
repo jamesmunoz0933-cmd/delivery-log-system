@@ -162,7 +162,7 @@ input:focus {
 #jumpLast:hover {
     background-color: #f7e300;
 }
- -1;          /* Ibutang sa likod para dili ma-tabunan */
+/* I-add ni lang sa ubos sa imong style.css para mu-override ug maayo */
 .background-video {
   position: fixed !important;
   top: 0 !important;
@@ -172,6 +172,17 @@ input:focus {
   object-fit: cover !important;
   z-index: -1 !important;
 }
+
+body, html {
+  background: transparent !important;  /* para dili magtabon ang color */
+}
+
+.container {
+  position: relative !important;       /* para mo-layer siya sa ibabaw */
+  z-index: 1 !important;
+  background: transparent !important;  /* para makita ang video sa likod */
+}
+
 
 
 

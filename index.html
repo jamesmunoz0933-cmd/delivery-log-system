@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Delivery Log System</title>
+  <title></title>
   <link rel="stylesheet" href="style.css" />
 
   <!-- PWA Manifest -->
@@ -13,7 +13,7 @@
   <meta name="theme-color" content="#d60000" />
 </head>
 
-<body>
+<body class="index-page">
 
   <!-- 🚧 UNDER MAINTENANCE SCREEN 🚧 -->
   <div id="maintenance-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: #111; z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: Arial, sans-serif; text-align: center; padding: 20px; color: white;">
@@ -31,9 +31,12 @@
         Your browser does not support the video tag.
       </video>
 
+      <!-- ⬇️ LOGO SA KANANG ITAAS ⬇️ -->
+      <img src="jolibe.png" alt="Logo" class="top-logo">
+
       <!-- Existing container/content (unchanged) -->
       <div class="container">
-          <h2>Delivery Log System</h2>
+          <h2></h2>
           <button class="btn-grab" onclick="location.href='grab.html'">Grab</button>
           <button class="btn-panda" onclick="location.href='panda.html'">FoodPanda</button>
           <button class="back-btn" onclick="location.href='admin-login.html'">Admin</button>
@@ -48,7 +51,7 @@
   // ==========================================
   // true  = Naka-OFF ang app (Under Maintenance)
   // false = Naka-ON ang app (Makita ang Grab/FoodPanda/Admin)
-  const IS_MAINTENANCE = true;
+  const IS_MAINTENANCE = false; 
 
   if (IS_MAINTENANCE === true) {
       document.getElementById('maintenance-screen').style.display = 'flex';

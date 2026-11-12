@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title></title>
+  <!-- Ang viewport na ito ang pumipigil sa pag-zoom out/in sa cellphone -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Delivery Log System</title>
   <link rel="stylesheet" href="style.css" />
 
   <!-- PWA Manifest -->
@@ -22,7 +23,7 @@
       <p style="font-size: 1rem; color: #888;">Please check back later. Thank you for your patience!</p>
   </div>
 
-  <!-- ⬇️ ANG IMONG ORIHINAL NGA APP (Gitagoan ni kung naka-maintenance) ⬇️ -->
+  <!-- ⬇️ ANG IMONG ORIHINAL NGA APP ⬇️ -->
   <div id="app-content" style="display: none;">
 
       <!-- Background video (focus lang ni, minimal) -->
@@ -34,7 +35,7 @@
       <!-- ⬇️ LOGO SA KANANG ITAAS ⬇️ -->
       <img src="jolibe.png" alt="Logo" class="top-logo">
 
-      <!-- Existing container/content (unchanged) -->
+      <!-- Existing container/content -->
       <div class="container">
           <h2></h2>
           <button class="btn-grab" onclick="location.href='grab.html'">Grab</button>
@@ -44,7 +45,7 @@
 
   </div>
 
-  <!-- PWA Install Button & Service Worker (unchanged) -->
+  <!-- PWA Install Button & Service Worker -->
   <script>
   // ==========================================
   // 🚧 MAINTENANCE SWITCH 🚧
@@ -61,7 +62,6 @@
       document.getElementById('app-content').style.display = 'block';
   }
   // ==========================================
-
 
   let deferredPrompt;
   const installBtn = document.createElement("button");
@@ -85,7 +85,6 @@
   window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      // Ayaw ipakita ang install button kung naka-maintenance
       if (IS_MAINTENANCE === false) {
           installBtn.style.display = "block";
       }

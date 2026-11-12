@@ -1,8 +1,7 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- Ang viewport na ito ang pumipigil sa pag-zoom out/in sa cellphone -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Delivery Log System</title>
   <link rel="stylesheet" href="style.css" />
@@ -16,53 +15,25 @@
 
 <body class="index-page">
 
-  <!-- 🚧 UNDER MAINTENANCE SCREEN 🚧 -->
-  <div id="maintenance-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: #111; z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: Arial, sans-serif; text-align: center; padding: 20px; color: white;">
-      <h1 style="font-size: 3rem; color: #d60000; margin-bottom: 10px;">🛠️ Under Maintenance</h1>
-      <p style="font-size: 1.2rem; color: #ccc;">We are currently updating the Delivery Log System.</p>
-      <p style="font-size: 1rem; color: #888;">Please check back later. Thank you for your patience!</p>
-  </div>
+  <!-- Background video -->
+  <video autoplay muted loop playsinline class="background-video">
+    <source src="nico.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
-  <!-- ⬇️ ANG IMONG ORIHINAL NGA APP ⬇️ -->
-  <div id="app-content" style="display: none;">
+  <!-- Logo sa kanang itaas -->
+  <img src="jolibe.png" alt="Logo" class="top-logo">
 
-      <!-- Background video (focus lang ni, minimal) -->
-      <video autoplay muted loop playsinline class="background-video">
-        <source src="nico.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-
-      <!-- ⬇️ LOGO SA KANANG ITAAS ⬇️ -->
-      <img src="jolibe.png" alt="Logo" class="top-logo">
-
-      <!-- Existing container/content -->
-      <div class="container">
-          <h2></h2>
-          <button class="btn-grab" onclick="location.href='grab.html'">Grab</button>
-          <button class="btn-panda" onclick="location.href='panda.html'">FoodPanda</button>
-          <button class="back-btn" onclick="location.href='admin-login.html'">Admin</button>
-      </div>
-
+  <!-- Main Container (Diretso na ito, walang nakatago) -->
+  <div class="container">
+      <h2>Delivery Log System</h2>
+      <button class="btn-grab" onclick="location.href='grab.html'">Grab</button>
+      <button class="btn-panda" onclick="location.href='panda.html'">FoodPanda</button>
+      <button class="back-btn" onclick="location.href='admin-login.html'">Admin</button>
   </div>
 
   <!-- PWA Install Button & Service Worker -->
   <script>
-  // ==========================================
-  // 🚧 MAINTENANCE SWITCH 🚧
-  // ==========================================
-  // true  = Naka-OFF ang app (Under Maintenance)
-  // false = Naka-ON ang app (Makita ang Grab/FoodPanda/Admin)
-  const IS_MAINTENANCE = false; 
-
-  if (IS_MAINTENANCE === true) {
-      document.getElementById('maintenance-screen').style.display = 'flex';
-      document.getElementById('app-content').style.display = 'none';
-  } else {
-      document.getElementById('maintenance-screen').style.display = 'none';
-      document.getElementById('app-content').style.display = 'block';
-  }
-  // ==========================================
-
   let deferredPrompt;
   const installBtn = document.createElement("button");
   installBtn.textContent = "Install App";
@@ -85,9 +56,7 @@
   window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      if (IS_MAINTENANCE === false) {
-          installBtn.style.display = "block";
-      }
+      installBtn.style.display = "block";
   });
 
   installBtn.addEventListener('click', async () => {

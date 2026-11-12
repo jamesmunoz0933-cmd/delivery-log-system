@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grab Delivery Log</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Static box style like input */
+        .static-box {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Grab Delivery Log</h2>
+
+    <input id="name" placeholder="Name">
+    <input id="phone" placeholder="Phone Number">
+    <input id="order" placeholder="Order Code">
+
+    <!-- ✅ Static Date & Time box after Order -->
+    <div id="datetime" class="static-box"></div>
+
+    <button id="submitGrab">Submit</button>
+    <button class="back-btn" onclick="location.href='index.html'">Back</button>
+
+    <p id="message"></p>
+</div>
+
+<script type="module">
+import { database, ref, push } from "./firebase.js";
+
+/* Format current date & time fully written */
+function getCurrentDateTime() {
+    const now = new Date();
+    const options = {
+        year: "numeric",
+        month: "long", // Full month name
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true
+    };
+    return now.toLocaleString("en-US", options);
+}
+
+/* Auto-fill static box when page opens */
+window.addEventListener("load", () => {
+    document.getElementById("datetime").textContent = getCurrentDateTime();
+});
+
+document.getElementById("submitGrab").addEventListener("click", () => {
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const order = document.getElementById("order").value.trim();
+    const datetime = document.getElementById("datetime").textContent;
+    const message = document.getElementById("message");
+
+    if (!name || !phone || !order) {
+        alert("All fields are required!");
+        return;
+    }
+
+    // Save log with automatic current date & time
+    push(ref(database, "grabLogs/"), {
+        name: name,
+        phone: phone,
+        order: order,
+        datetime: datetime
+    })
+    .then(() => {
+        message.textContent = "Log saved successfully!";
+        message.style.color = "green";
+
+        // Clear user inputs (static box stays)
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("order").value = "";
+
+        // Update static box for next log
+        document.getElementById("datetime").textContent = getCurrentDateTime();
+
+        setTimeout(() => message.textContent = "", 3000);
+    })
+    .catch(err => alert("Error saving log: " + err.message));
+});
+</script>
+
+</body>
+</html>
+

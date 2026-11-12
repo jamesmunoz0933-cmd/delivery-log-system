@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Monitor</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            background: #fff5f5;
+            color: #333;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        h1 {
+            font-size: 64px;
+            color: #d60000;
+            margin-bottom: 40px;
+        }
+
+        .btns {
+            display: flex;
+            gap: 50px;
+        }
+
+        .btn-monitor {
+            padding: 30px 60px;
+            font-size: 36px;
+            font-weight: bold;
+            border-radius: 15px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-grab {
+            background: #00b140;
+            color: white;
+        }
+        .btn-grab:hover {
+            background: #009b35;
+        }
+
+        .btn-panda {
+            background: #ff2b85;
+            color: white;
+        }
+        .btn-panda:hover {
+            background: #e02676;
+        }
+    </style>
+</head>
+
+<!-- Clicking anywhere → Admin Dashboard -->
+<body onclick="location.href='admin-dashboard.html'">
+
+    <h1>Delivery Log Monitor</h1>
+
+    <div class="btns">
+        <button class="btn-monitor btn-grab" onclick="event.stopPropagation(); location.href='grab.html';">Grab</button>
+        <button class="btn-monitor btn-panda" onclick="event.stopPropagation(); location.href='panda.html';">FoodPanda</button>
+    </div>
+
+    <p style="margin-top: 50px; font-size: 24px;">Click anywhere to go to Admin Dashboard</p>
+
+</body>
+</html>
